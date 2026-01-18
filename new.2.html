@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Opener</title>
+</head>
+<body>
+    <h2>Names</h2>
+    <div id="names-container">
+        <input type="text" class="name-input" placeholder="Name">
+    </div>
+    <button onclick="addName()">Add Name</button>
+
+    <h2>Addresses</h2>
+    <div id="addresses-container">
+        <input type="text" class="address-input" placeholder="Address">
+    </div>
+    <button onclick="addAddress()">Add Address</button>
+
+    <h2>Countries</h2>
+    <div id="countries-container">
+        <input type="text" class="country-input" placeholder="Country">
+    </div>
+    <button onclick="addCountry()">Add Country</button>
+
+    <br><br>
+    <button onclick="openTabs()">I4</button>
+    <button onclick="openTabsI2()">I2</button>
+
+    <script>
+        function addName() {
+            const container = document.getElementById('names-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'name-input';
+            input.placeholder = 'Name';
+            const wrapper = document.createElement('div');
+            wrapper.appendChild(input);
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => wrapper.remove();
+            wrapper.appendChild(removeBtn);
+            container.appendChild(wrapper);
+        }
+
+        function addAddress() {
+            const container = document.getElementById('addresses-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'address-input';
+            input.placeholder = 'Address';
+            const wrapper = document.createElement('div');
+            wrapper.appendChild(input);
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => wrapper.remove();
+            wrapper.appendChild(removeBtn);
+            container.appendChild(wrapper);
+        }
+
+        function addCountry() {
+            const container = document.getElementById('countries-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'country-input';
+            input.placeholder = 'Country';
+            const wrapper = document.createElement('div');
+            wrapper.appendChild(input);
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => wrapper.remove();
+            wrapper.appendChild(removeBtn);
+            container.appendChild(wrapper);
+        }
+
+        function openTabs() {
+            const names = Array.from(document.querySelectorAll('.name-input')).map(el => el.value).filter(v => v);
+            const addresses = Array.from(document.querySelectorAll('.address-input')).map(el => el.value).filter(v => v);
+            const countries = Array.from(document.querySelectorAll('.country-input')).map(el => el.value).filter(v => v);
+
+            names.forEach(name => {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent('"' + name + '"')}`);
+            });
+
+            names.forEach(name => {
+                addresses.forEach(address => {
+                    window.open(`https://www.google.com/search?q=${encodeURIComponent('"' + name + '" + "' + address + '"')}`);
+                });
+            });
+
+            addresses.forEach(address => {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent('"' + address + '"')}`);
+            });
+
+            names.forEach(name => {
+                countries.forEach(country => {
+                    window.open(`https://www.google.com/search?q=${encodeURIComponent('"' + name + '" + "' + country + '"')}`);
+                });
+            });
+        }
+
+        function openTabsI2() {
+            const names = Array.from(document.querySelectorAll('.name-input')).map(el => el.value).filter(v => v);
+            const addresses = Array.from(document.querySelectorAll('.address-input')).map(el => el.value).filter(v => v);
+
+            names.forEach(name => {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent('"' + name + '"')}`);
+            });
+
+            names.forEach(name => {
+                addresses.forEach(address => {
+                    window.open(`https://www.google.com/search?q=${encodeURIComponent('"' + name + '" + "' + address + '"')}`);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
